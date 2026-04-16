@@ -44,38 +44,31 @@ function checkIfJobSite() {
                      currentTabUrl.includes('indeed.com/viewjob') ||
                      currentTabUrl.includes('glassdoor.com/job-listing');
     
-    if (isJobSite) {
-        extractJobDetails();
-    } else {
+    if (!isJobSite) {
         document.getElementById('jobInfo').innerHTML = '<p><i class="fas fa-info-circle"></i> Navigate to a job posting to extract details</p>';
     }
 }
 
 async function extractJobDetails() {
     showLoading(true);
+    
     try {
-        const response = await fetch(`${API_BASE}/extract_job_details`, {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({url: currentTabUrl})
-        });
+        const [tab] = await chrome.tabs.query({active: true, currentWindow: true});
+        const response = await chrome.tabs.sendMessage(tab.id, {action: 'getJobDetails'});
         
-        currentJobDetails = await response.json();
-        
-        const jobInfo = document.getElementById('jobInfo');
-        if (currentJobDetails.company || currentJobDetails.position) {
-            jobInfo.innerHTML = `
-                <p><i class="fas fa-building"></i> <strong>Company:</strong> ${currentJobDetails.company || 'N/A'}</p>
-                <p><i class="fas fa-briefcase"></i> <strong>Position:</strong> ${currentJobDetails.position || 'N/A'}</p>
-                <p><i class="fas fa-globe"></i> <strong>Platform:</strong> ${getPlatform()}</p>
-            `;
+        if (response && response.company) {
+            document.getElementById('companyName').value = response.company;
+            document.getElementById('positionName').value = response.position;
+            showSuccess('Job details extracted automatically!');
+            currentJobDetails = response;
         } else {
-            jobInfo.innerHTML = '<p><i class="fas fa-exclamation-triangle"></i> Unable to extract details automatically. Please fill manually.</p>';
+            showError('Could not extract. Please enter manually.');
         }
     } catch (error) {
-        console.error('Error extracting job details:', error);
-        document.getElementById('jobInfo').innerHTML = '<p><i class="fas fa-exclamation-circle"></i> Error extracting details. Please fill manually.</p>';
+        console.error('Extraction error:', error);
+        showError('Manual entry required');
     }
+    
     showLoading(false);
 }
 
@@ -130,15 +123,12 @@ async function autoApply() {
 }
 
 async function trackApplication() {
-    if (!currentJobDetails || !currentJobDetails.company || !currentJobDetails.position) {
-        const company = prompt('Enter company name:');
-        const position = prompt('Enter position title:');
-        if (!company || !position) return;
-        
-        currentJobDetails = {
-            company: company,
-            position: position
-        };
+    const company = document.getElementById('companyName').value;
+    const position = document.getElementById('positionName').value;
+    
+    if (!company || !position) {
+        showError('Please enter company name and position title');
+        return;
     }
     
     showLoading(true);
@@ -147,8 +137,8 @@ async function trackApplication() {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
-                company: currentJobDetails.company,
-                position: currentJobDetails.position,
+                company: company,
+                position: position,
                 platform: getPlatform(),
                 url: currentTabUrl,
                 notes: ''
@@ -158,6 +148,8 @@ async function trackApplication() {
         const result = await response.json();
         if (result.success) {
             showSuccess('Application tracked successfully!');
+            document.getElementById('companyName').value = '';
+            document.getElementById('positionName').value = '';
             loadStatistics();
         }
     } catch (error) {
@@ -222,7 +214,5 @@ async function loadStatistics() {
 }
 
 function viewExcelFile() {
-    const excelPath = 'file:///' + chrome.runtime.getURL('../backend/job_applications.xlsx');
-    chrome.tabs.create({url: excelPath});
+    alert('Your Excel file is located at:\nC:\\Users\\mfeny\\job-tracker-extension\\backend\\job_applications.xlsx');
 }
-
