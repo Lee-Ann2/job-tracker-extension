@@ -1,19 +1,17 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-from excel_manager import ExcelManager
-from auto_applier import AutoApplier
-import json
+from job_tracker import JobTracker
+import os
 
 app = Flask(__name__)
 CORS(app)
 
-excel_manager = ExcelManager()
-auto_applier = AutoApplier()
+job_tracker = JobTracker("job_applications.xlsx")
 
 @app.route('/api/add_application', methods=['POST'])
 def add_application():
     data = request.json
-    row_index = excel_manager.add_application(
+    row_index = job_tracker.add_application(
         company=data['company'],
         position=data['position'],
         platform=data['platform'],
@@ -25,48 +23,50 @@ def add_application():
 @app.route('/api/update_status', methods=['POST'])
 def update_status():
     data = request.json
-    success = excel_manager.update_status(
+    success = job_tracker.update_status(
         row_index=data['row_index'],
         status=data['status'],
         notes=data.get('notes', '')
     )
     return jsonify({"success": success})
 
-@app.route('/api/auto_apply', methods=['POST'])
-def auto_apply():
-    data = request.json
-    job_url = data['url']
-    platform = data['platform']
-    resume_path = data.get('resume_path', '')
-    
-    if platform == 'linkedin':
-        result = auto_applier.apply_linkedin(job_url, resume_path)
-    elif platform == 'indeed':
-        result = auto_applier.apply_indeed(job_url, resume_path)
-    elif platform == 'glassdoor':
-        result = auto_applier.apply_glassdoor(job_url, resume_path)
-    else:
-        result = {"success": False, "message": "Unsupported platform"}
-    
-    return jsonify(result)
-
-@app.route('/api/extract_job_details', methods=['POST'])
-def extract_job_details():
-    data = request.json
-    url = data['url']
-    details = auto_applier.extract_job_details(url)
-    return jsonify(details)
-
 @app.route('/api/get_statistics', methods=['GET'])
 def get_statistics():
-    stats = excel_manager.get_statistics()
+    stats = job_tracker.get_statistics()
     return jsonify(stats)
 
 @app.route('/api/get_applications', methods=['GET'])
 def get_applications():
-    import pandas as pd
-    df = pd.read_excel(excel_manager.filename)
-    return jsonify(df.to_dict('records'))
+    applications = job_tracker.get_all_applications()
+    return jsonify(applications)
+
+@app.route('/api/extract_job_details', methods=['POST'])
+def extract_job_details():
+    data = request.json
+    url = data.get('url', '')
+    details = {"company": "", "position": "", "platform": "unknown"}
+    
+    if "linkedin.com" in url:
+        details["platform"] = "linkedin"
+    elif "indeed.com" in url:
+        details["platform"] = "indeed"
+    elif "glassdoor.com" in url:
+        details["platform"] = "glassdoor"
+    
+    return jsonify(details)
+
+@app.route('/', methods=['GET'])
+def home():
+    return jsonify({
+        "message": "Job Tracker Pro API is running",
+        "status": "active",
+        "endpoints": [
+            "/api/add_application",
+            "/api/update_status",
+            "/api/get_statistics",
+            "/api/get_applications"
+        ]
+    })
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
