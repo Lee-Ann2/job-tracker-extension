@@ -1,0 +1,245 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Open Sans', 'Roboto', sans-serif;
+    background: linear-gradient(135deg, #004030 0%, #4A9782 100%);
+    min-height: 100vh;
+    color: #004030;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.header {
+    text-align: center;
+    padding: 60px 20px;
+    color: #FFF9E5;
+}
+
+.logo {
+    font-size: 64px;
+    margin-bottom: 20px;
+}
+
+.logo i {
+    font-size: 64px;
+    color: #FFF9E5;
+}
+
+h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 48px;
+    margin-bottom: 20px;
+    font-weight: 800;
+    color: #FFF9E5;
+}
+
+.tagline {
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
+    opacity: 0.95;
+    margin-bottom: 30px;
+    color: #DCD0A8;
+}
+
+.install-btn {
+    background: #FFF9E5;
+    color: #004030;
+    border: none;
+    padding: 15px 40px;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    font-family: 'Montserrat', sans-serif;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+}
+
+.install-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+    background: #DCD0A8;
+}
+
+.features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    padding: 40px 20px;
+}
+
+.feature-card {
+    background: #FFF9E5;
+    border-radius: 20px;
+    padding: 30px;
+    text-align: center;
+    transition: transform 0.3s;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+}
+
+.feature-icon i {
+    font-size: 48px;
+    color: #4A9782;
+    margin-bottom: 20px;
+}
+
+.feature-card h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 24px;
+    margin-bottom: 15px;
+    color: #004030;
+}
+
+.feature-card p {
+    color: #4A9782;
+    line-height: 1.6;
+}
+
+.how-it-works {
+    background: #FFF9E5;
+    border-radius: 20px;
+    padding: 50px;
+    margin: 40px 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.section-title {
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
+    font-size: 36px;
+    margin-bottom: 40px;
+    color: #004030;
+}
+
+.steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+.step {
+    text-align: center;
+}
+
+.step-number {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, #004030 0%, #4A9782 100%);
+    color: #FFF9E5;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0 auto 20px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.step h4 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #004030;
+}
+
+.step p {
+    color: #4A9782;
+}
+
+.platforms {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin: 40px 0;
+    flex-wrap: wrap;
+}
+
+.platform-badge {
+    background: #FFF9E5;
+    padding: 15px 30px;
+    border-radius: 50px;
+    font-weight: 600;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #004030;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.platform-badge i {
+    font-size: 20px;
+    color: #4A9782;
+}
+
+.footer {
+    text-align: center;
+    padding: 40px;
+    color: #FFF9E5;
+    margin-top: 40px;
+}
+
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #FFF9E5;
+    color: #004030;
+    padding: 15px 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 600;
+    transform: translateX(400px);
+    transition: transform 0.3s ease;
+    z-index: 1000;
+}
+
+.notification.show {
+    transform: translateX(0);
+}
+
+.notification i {
+    margin-right: 10px;
+    color: #4A9782;
+}
+
+@media (max-width: 768px) {
+    h1 {
+        font-size: 32px;
+    }
+    
+    .tagline {
+        font-size: 16px;
+    }
+    
+    .features {
+        grid-template-columns: 1fr;
+    }
+    
+    .how-it-works {
+        padding: 30px;
+    }
+    
+    .section-title {
+        font-size: 28px;
+    }
+}
+
