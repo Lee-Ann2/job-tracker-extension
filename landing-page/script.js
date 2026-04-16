@@ -1,3 +1,5 @@
+const API_URL = 'https://job-tracker-api.vercel.app/api';
+
 function showNotification(message, isError = false) {
     const notification = document.getElementById('notification');
     notification.innerHTML = `<i class="fas ${isError ? 'fa-exclamation-triangle' : 'fa-check-circle'}"></i> ${message}`;
@@ -10,53 +12,64 @@ function showNotification(message, isError = false) {
 
 function downloadExtension() {
     const link = document.createElement('a');
-    link.href = 'extension.zip';
+    link.href = 'job-tracker-pro-extension.zip';
     link.download = 'job-tracker-pro-extension.zip';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
-    showNotification('Extension downloaded successfully! Check your Downloads folder.');
+    showNotification('Extension downloaded! Check your Downloads folder.');
 }
 
 function showInstallInstructions() {
     const instructions = `
-        📦 Installation Steps:\n\n
-        1️⃣ Extract the downloaded ZIP file\n
-        2️⃣ Open Chrome and go to chrome://extensions/\n
-        3️⃣ Enable "Developer mode" (toggle in top right)\n
-        4️⃣ Click "Load unpacked"\n
-        5️⃣ Select the extracted extension folder\n
-        6️⃣ Make sure backend server is running at http://localhost:5000\n
-        7️⃣ Click the extension icon to start tracking!
+📦 INSTALLATION STEPS:
+
+1️⃣ Extract the downloaded ZIP file
+
+2️⃣ Open Chrome and go to: chrome://extensions/
+
+3️⃣ Enable "Developer mode" (toggle in top right)
+
+4️⃣ Click "Load unpacked"
+
+5️⃣ Select the extracted extension folder
+
+6️⃣ Your extension is now installed!
+
+7️⃣ Click the extension icon to start tracking jobs
     `;
-    
-    showNotification('Check console for installation instructions', false);
-    console.log(instructions);
     
     alert(instructions);
 }
 
-function checkBackendStatus() {
-    fetch('http://localhost:5000/api/get_statistics')
-        .then(response => response.json())
-        .then(data => {
-            showNotification('✅ Backend server is running! You can use all features including auto-apply.');
-        })
-        .catch(error => {
-            showNotification('⚠️ Backend server not running. Auto-apply feature will be limited. Start the server with: python main.py', true);
-        });
+async function checkAPIStatus() {
+    const statusDiv = document.getElementById('apiStatus');
+    
+    try {
+        const response = await fetch(`${API_URL}/get_statistics`);
+        const data = await response.json();
+        
+        statusDiv.innerHTML = '<i class="fas fa-check-circle"></i> API Online - Ready to track jobs!';
+        statusDiv.classList.add('online');
+        statusDiv.classList.remove('offline');
+        showNotification('API is online! Extension is ready to use.', false);
+    } catch (error) {
+        statusDiv.innerHTML = '<i class="fas fa-exclamation-triangle"></i> API Offline - Run local backend for auto-apply';
+        statusDiv.classList.add('offline');
+        statusDiv.classList.remove('online');
+        console.log('API offline:', error);
+    }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    const installBtn = document.getElementById('installBtn');
+    const downloadBtn = document.getElementById('downloadBtn');
     
-    installBtn.addEventListener('click', (e) => {
+    downloadBtn.addEventListener('click', (e) => {
         e.preventDefault();
         showInstallInstructions();
     });
     
     setTimeout(() => {
-        checkBackendStatus();
+        checkAPIStatus();
     }, 1000);
 });
-
