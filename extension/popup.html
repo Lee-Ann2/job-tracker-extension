@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Job Tracker Pro</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+    <div class="header">
+        <h2><i class="fas fa-chart-line"></i> Job Tracker Pro</h2>
+        <p><i class="fas fa-brain"></i> Smart Application Management</p>
+    </div>
+
+    <div class="content">
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <p><i class="fas fa-spinner fa-pulse"></i> Processing...</p>
+        </div>
+
+        <div id="jobDetails" class="section">
+            <h3><i class="fas fa-briefcase"></i> Current Job</h3>
+            <div id="jobInfo" class="job-info">
+                <p><i class="fas fa-info-circle"></i> Navigate to a job posting to see details</p>
+            </div>
+            <button id="extractBtn"><i class="fas fa-magic"></i> Extract Job Details</button>
+        </div>
+
+        <div class="section">
+            <h3><i class="fas fa-bolt"></i> Quick Actions</h3>
+            <button id="trackBtn"><i class="fas fa-bookmark"></i> Track This Application</button>
+            <button id="autoApplyBtn" class="btn-auto-apply"><i class="fas fa-rocket"></i> Auto Apply</button>
+        </div>
+
+        <div class="section">
+            <h3><i class="fas fa-file-alt"></i> Resume Path</h3>
+            <input type="text" id="resumePath" placeholder="C:/path/to/your/resume.pdf">
+            <div id="applyResult" class="apply-result"></div>
+        </div>
+
+        <div class="section">
+            <h3><i class="fas fa-sync-alt"></i> Update Status</h3>
+            <select id="statusSelect">
+                <option value="Applied"><i class="fas fa-pen"></i> Applied</option>
+                <option value="Interview"><i class="fas fa-comments"></i> Interview</option>
+                <option value="Rejected"><i class="fas fa-times-circle"></i> Rejected</option>
+                <option value="Ignored"><i class="fas fa-clock"></i> Ignored</option>
+                <option value="Offer"><i class="fas fa-trophy"></i> Offer Received</option>
+            </select>
+            <textarea id="statusNotes" rows="2" placeholder="Add notes..."></textarea>
+            <button id="updateStatusBtn"><i class="fas fa-check-circle"></i> Update Status</button>
+        </div>
+
+        <div class="section">
+            <h3><i class="fas fa-chart-bar"></i> Statistics</h3>
+            <div id="stats" class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">0</div>
+                    <div class="stat-label"><i class="fas fa-database"></i> Total</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">0</div>
+                    <div class="stat-label"><i class="fas fa-handshake"></i> Interviews</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">0</div>
+                    <div class="stat-label"><i class="fas fa-frown"></i> Rejected</div>
+                </div>
+            </div>
+            <button id="viewExcelBtn" class="btn-excel"><i class="fas fa-file-excel"></i> Open Excel File</button>
+        </div>
+
+        <div class="platform-icons">
+            <span><i class="fab fa-linkedin"></i> LinkedIn</span>
+            <span><i class="fas fa-search"></i> Indeed</span>
+            <span><i class="fas fa-building"></i> Glassdoor</span>
+        </div>
+    </div>
+
+    <div id="successAlert" class="alert-success"><i class="fas fa-check-circle"></i> <span></span></div>
+    <div id="errorAlert" class="alert-error"><i class="fas fa-exclamation-triangle"></i> <span></span></div>
+
+    <script src="popup.js"></script>
+</body>
+</html>
+

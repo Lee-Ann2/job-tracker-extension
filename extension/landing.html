@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Tracker Pro - Smart Job Application Manager</title>
+    <link rel="stylesheet" href="landing.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header fade-in">
+            <div class="logo">
+                <i class="fas fa-chart-simple"></i>
+            </div>
+            <h1>Job Tracker Pro</h1>
+            <div class="tagline">
+                <i class="fas fa-magic"></i> Smart Application Management • 
+                <i class="fas fa-rocket"></i> Auto-Apply • 
+                <i class="fas fa-chart-line"></i> Real-time Analytics
+            </div>
+            <button class="install-btn" onclick="showInstallInstructions()">
+                <i class="fab fa-chrome"></i> Install Extension
+            </button>
+        </div>
+
+        <div class="alert" id="installAlert">
+            <i class="fas fa-check-circle"></i> Extension installed successfully! Click the icon in your browser toolbar to start tracking.
+        </div>
+
+        <div class="features">
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-bullseye"></i></div>
+                <h3>Auto-Track Applications</h3>
+                <p>Automatically capture job details from LinkedIn, Indeed, and Glassdoor. Never miss an application again.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-bolt"></i></div>
+                <h3>One-Click Apply</h3>
+                <p>Auto-apply to jobs with your saved resume. Save hours of manual application time.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-chart-pie"></i></div>
+                <h3>Smart Analytics</h3>
+                <p>Track acceptance rates, interview invites, and rejection patterns. Make data-driven decisions.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-file-excel"></i></div>
+                <h3>Excel Integration</h3>
+                <p>All data automatically synced to Excel with color-coded status tracking.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-bell"></i></div>
+                <h3>Status Updates</h3>
+                <p>Track applications through Applied → Interview → Offer → Rejected pipeline.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-chart-line"></i></div>
+                <h3>Performance Metrics</h3>
+                <p>Visualize your job search progress with real-time statistics and insights.</p>
+            </div>
+        </div>
+
+        <div class="how-it-works">
+            <h2 class="section-title"><i class="fas fa-question-circle"></i> How It Works</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h4><i class="fas fa-download"></i> Install Extension</h4>
+                    <p>Add Job Tracker Pro to Chrome in one click</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h4><i class="fas fa-search"></i> Browse Jobs</h4>
+                    <p>Visit LinkedIn, Indeed, or Glassdoor job postings</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h4><i class="fas fa-bookmark"></i> Track & Apply</h4>
+                    <p>Click extension icon to track or auto-apply</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h4><i class="fas fa-chart-line"></i> Monitor Progress</h4>
+                    <p>View statistics and open Excel file anytime</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="stats-demo">
+            <h2 class="section-title"><i class="fas fa-trophy"></i> Track Your Success</h2>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">100+</div>
+                    <div class="stat-label"><i class="fas fa-file-alt"></i> Applications Tracked</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">35%</div>
+                    <div class="stat-label"><i class="fas fa-chart-line"></i> Interview Rate</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">15</div>
+                    <div class="stat-label"><i class="fas fa-users"></i> Active Interviews</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">3</div>
+                    <div class="stat-label"><i class="fas fa-gift"></i> Offers Received</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="platforms">
+            <div class="platform-badge"><i class="fab fa-linkedin"></i> LinkedIn</div>
+            <div class="platform-badge"><i class="fas fa-search"></i> Indeed</div>
+            <div class="platform-badge"><i class="fas fa-building"></i> Glassdoor</div>
+        </div>
+
+        <div class="how-it-works">
+            <h2 class="section-title"><i class="fas fa-rocket"></i> Quick Start Guide</h2>
+            <div style="max-width: 600px; margin: 0 auto;">
+                <div class="guide-step">
+                    <i class="fas fa-mouse-pointer"></i> <strong>Step 1:</strong> Click the extension icon in your browser toolbar
+                </div>
+                <div class="guide-step">
+                    <i class="fas fa-magic"></i> <strong>Step 2:</strong> Click "Extract Job Details" to auto-fill job information
+                </div>
+                <div class="guide-step">
+                    <i class="fas fa-rocket"></i> <strong>Step 3:</strong> Use "Auto Apply" to submit application automatically
+                </div>
+                <div class="guide-step">
+                    <i class="fas fa-sync-alt"></i> <strong>Step 4:</strong> Update status and track progress in Excel
+                </div>
+                <div class="guide-step">
+                    <i class="fas fa-chart-line"></i> <strong>Step 5:</strong> View statistics and analytics dashboard
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p><i class="far fa-copyright"></i> 2024 Job Tracker Pro - Your Career Management Companion</p>
+            <p><i class="fas fa-heart"></i> Made with love for job seekers</p>
+        </div>
+    </div>
+
+    <script>
+        function showInstallInstructions() {
+            const alertBox = document.getElementById('installAlert');
+            alertBox.style.display = 'block';
+            
+            setTimeout(() => {
+                alertBox.style.display = 'none';
+            }, 5000);
+        }
+    </script>
+</body>
+</html>
+
