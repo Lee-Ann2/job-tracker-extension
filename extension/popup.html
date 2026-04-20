@@ -3,7 +3,7 @@
 <head>
     <title>Job Tracker Pro</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;500;600&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="popup.css">
 </head>
 <body>
@@ -21,9 +21,14 @@
         <div id="jobDetails" class="section">
             <h3><i class="fas fa-briefcase"></i> Job Details</h3>
             <div class="job-info">
-                <input type="text" id="companyName" placeholder="Company Name" style="margin-bottom: 8px; width: 100%; padding: 8px; border: 2px solid #DCD0A8; border-radius: 8px;">
-                <input type="text" id="positionName" placeholder="Position Title" style="width: 100%; padding: 8px; border: 2px solid #DCD0A8; border-radius: 8px;">
+                <input type="text" id="companyName" placeholder="Company Name">
+                <input type="text" id="positionName" placeholder="Position Title" style="margin-top:8px;">
             </div>
+            <div id="lastTrackedBadge" style="
+                display:none; font-size:11px; color:#4A9782;
+                margin-bottom:8px; font-family:'Open Sans',sans-serif;
+                background:#f0f9f6; padding:5px 10px; border-radius:6px;
+            "></div>
             <button id="extractBtn"><i class="fas fa-magic"></i> Extract Job Details</button>
         </div>
 
@@ -34,19 +39,19 @@
         </div>
 
         <div class="section">
-            <h3><i class="fas fa-file-alt"></i> Resume Path</h3>
+            <h3><i class="fas fa-file-alt"></i> Resume Path (for Auto Apply)</h3>
             <input type="text" id="resumePath" placeholder="C:/path/to/your/resume.pdf">
             <div id="applyResult" class="apply-result"></div>
         </div>
 
         <div class="section">
-            <h3><i class="fas fa-sync-alt"></i> Update Status</h3>
+            <h3><i class="fas fa-sync-alt"></i> Update Most Recent Application</h3>
             <select id="statusSelect">
-                <option value="Applied"><i class="fas fa-pen"></i> Applied</option>
-                <option value="Interview"><i class="fas fa-comments"></i> Interview</option>
-                <option value="Rejected"><i class="fas fa-times-circle"></i> Rejected</option>
-                <option value="Ignored"><i class="fas fa-clock"></i> Ignored</option>
-                <option value="Offer"><i class="fas fa-trophy"></i> Offer Received</option>
+                <option value="Applied">Applied</option>
+                <option value="Interview">Interview</option>
+                <option value="Rejected">Rejected</option>
+                <option value="Ignored">Ignored</option>
+                <option value="Offer">Offer Received</option>
             </select>
             <textarea id="statusNotes" rows="2" placeholder="Add notes..."></textarea>
             <button id="updateStatusBtn"><i class="fas fa-check-circle"></i> Update Status</button>
@@ -68,7 +73,9 @@
                     <div class="stat-label"><i class="fas fa-frown"></i> Rejected</div>
                 </div>
             </div>
-            <button id="viewExcelBtn" class="btn-excel"><i class="fas fa-file-excel"></i> Open Excel File</button>
+            <button id="viewExcelBtn" class="btn-excel" style="margin-top:10px;">
+                <i class="fas fa-list"></i> View All Applications
+            </button>
         </div>
 
         <div class="platform-icons">
@@ -84,4 +91,3 @@
     <script src="popup.js"></script>
 </body>
 </html>
-
