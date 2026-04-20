@@ -1,24 +1,18 @@
 {
   "manifest_version": 3,
   "name": "Job Tracker Pro",
-  "version": "1.1",
-  "description": "Smart job application tracker with auto-apply and analytics for LinkedIn, Indeed, and Glassdoor",
+  "version": "2.0",
+  "description": "Track job applications from LinkedIn, Indeed, and Glassdoor. Save instantly, no server needed.",
   "permissions": [
     "activeTab",
     "storage",
     "tabs",
-    "downloads",
     "scripting"
   ],
   "host_permissions": [
-    "https://www.linkedin.com/*",
-    "https://linkedin.com/*",
-    "https://www.indeed.com/*",
-    "https://indeed.com/*",
-    "https://www.glassdoor.com/*",
-    "https://glassdoor.com/*",
-    "http://localhost:5000/*",
-    "https://job-tracker-extension.vercel.app/*"
+    "https://*.linkedin.com/*",
+    "https://*.indeed.com/*",
+    "https://*.glassdoor.com/*"
   ],
   "action": {
     "default_popup": "popup.html",
@@ -28,31 +22,11 @@
       "128": "icons/icon128.png"
     }
   },
-  "chrome_url_overrides": {
-    "newtab": "landing.html"
-  },
-  "content_scripts": [
-    {
-      "matches": [
-        "https://www.linkedin.com/jobs/*",
-        "https://linkedin.com/jobs/*",
-        "https://www.indeed.com/viewjob*",
-        "https://www.indeed.com/rc/clk*",
-        "https://indeed.com/viewjob*",
-        "https://www.glassdoor.com/job-listing/*",
-        "https://www.glassdoor.com/Jobs/*",
-        "https://glassdoor.com/job-listing/*",
-        "https://glassdoor.com/Jobs/*"
-      ],
-      "js": ["content.js"],
-      "run_at": "document_idle"
-    }
-  ],
   "background": {
     "service_worker": "background.js"
   },
   "web_accessible_resources": [{
-    "resources": ["icons/*", "content.js"],
+    "resources": ["icons/*"],
     "matches": ["<all_urls>"]
   }]
 }
